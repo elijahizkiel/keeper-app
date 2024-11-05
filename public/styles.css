@@ -1,0 +1,44 @@
+body {
+    background-color: #e1e0e0;
+    overflow-x: hidden;
+  }
+div#root {
+    position: relative;
+    top: -2.5vw;
+    left: -1vw;
+}
+  
+.header{
+    background: #ffb700;
+    color:#ece5d4;
+    font-weight:600;
+    padding: 1.25rem 1.25rem 1.25rem 2rem;
+    display:block;
+    width:105vw;
+}
+.note-card {
+    background-color: #fff;
+    width:max-content;
+    max-width: 25vw;
+    min-width: 10vw;
+    border-radius: 5pt;
+    overflow: hidden; 
+    margin: 2rem 4rem;
+}
+.note-title {
+    color: #cd8924;
+    background-color: #ece5d4;
+    padding:10px;
+    margin:0;
+}
+.note-text {
+    margin: 0;
+    padding: 10px;
+}
+footer {
+    position:absolute;
+    top: 90vh;
+    width: max(fit-content,20vw);
+    max-width: 80vw;
+    margin:5vh 5vw;
+}
