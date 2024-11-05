@@ -1,7 +1,8 @@
 function Header(props){
-    return (<>
-    <h1>{props.text}</h1>
-    </>);
+    return (
+    <header>
+        <h1 className="header">{props.text}</h1>
+    </header>);
 }
 
 export default Header;

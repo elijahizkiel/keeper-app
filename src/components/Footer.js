@@ -1,6 +1,6 @@
-function Footer(porps){
+function Footer(props){
     return (
-        <footer>{porps.text}</footer>
+        <footer className="footer">{`${props.text} ${props.year}`}</footer>
     );
 }
 
