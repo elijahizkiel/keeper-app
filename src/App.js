@@ -8,7 +8,8 @@ const date = new Date(Date.now());
 
 function App() {
     let [notes, setNotes] = useState([]);
-
+    let [takingNote, setTakingNote] = useState(false);
+    
     function addNote(title,noteContent, lastTimeUpdated){
         setNotes((prev) => [...prev,new Note(title,noteContent,lastTimeUpdated)]);
     }
@@ -25,10 +26,17 @@ function App() {
     <>
     <Header text="Keeper" />
     <main>
-    <Form onClick={addNote} />
-    {notes?.map(note => {
-        return <NoteCard key={note.title} title={note.title} text={note.content} onClick={deleteNote} />
-    })}
+        {
+        takingNote?<Form onClick={addNote} onDone={()=> setTakingNote(!takingNote)} />:
+            <button className='take-note-btn' onClick={()=>{
+                setTakingNote(!takingNote);
+            }}>Take Note</button>
+        }
+        <div className='note-cards'>
+        {notes?.map(note => {
+            return <NoteCard key={note.title} title={note.title} text={note.content} onClick={deleteNote} />
+        })}
+        </div>
     </main>
     <Footer text="Copy right reserved ©" year={date.getFullYear()} />
     </>
