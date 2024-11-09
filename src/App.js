@@ -1,18 +1,38 @@
+import React,{useState} from 'react'
 import Header from './components/Header';
-import Note from './components/Note';
+import NoteCard,{Note} from './components/NoteCard';
 import Footer from './components/Footer';
-import './App.css';
+import Form from "./components/Form";
 
-const date = new Date(Date.now())
+const date = new Date(Date.now());
 
 function App() {
+    let [notes, setNotes] = useState([]);
+
+    function addNote(title,noteContent, lastTimeUpdated){
+        setNotes((prev) => [...prev,new Note(title,noteContent,lastTimeUpdated)]);
+    }
+
+    function deleteNote(id){
+        setNotes((prev)=>{
+            return prev.filter((item) => {
+                return (item.title !== id);
+            }) 
+        })
+    }
+
  return (
-  <>
-  <Header text="Keeper" />
-  <Note title="This is the note Title" text="Here is the content" />
-  <Footer text="Copy right reserved ©" year={date.getFullYear()} />
-  </>
- );
+    <>
+    <Header text="Keeper" />
+    <main>
+    <Form onClick={addNote} />
+    {notes?.map(note => {
+        return <NoteCard key={note.title} title={note.title} text={note.content} onClick={deleteNote} />
+    })}
+    </main>
+    <Footer text="Copy right reserved ©" year={date.getFullYear()} />
+    </>
+    );
 }
 
 export default App;
