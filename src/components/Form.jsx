@@ -17,11 +17,18 @@ function Form(props){
     
 return <form>
     <InputFields onTitleChange={setTitle} onContentChange={setContent} titleValue ={noteTitle} contentValue={noteContent} />
+    <div className="note-btns">
     <button type="button" id="add-note-btn" onClick={()=>{
-        props.onClick(noteTitle, noteContent,new Date(Date.now));
-        setNoteContent('');
-        setNoteTitle('');
+        if(noteContent !== undefined && noteContent.trim() !== ""){
+            noteTitle = (noteTitle === undefined || noteTitle.trim() === "")?
+                noteContent.substring(0,21).trim(): noteTitle; 
+            props.onClick(noteTitle, noteContent,new Date(Date.now));
+            setNoteContent('');
+            setNoteTitle('');
+        }
         }}>ADD</button>
+        <button type="button" onClick={props.onDone}>Done</button>
+    </div>
 </form>
 }
 
