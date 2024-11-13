@@ -10,6 +10,8 @@ function Form(props){
         setNoteTitle(value);
     }
 
+    let nowDate = new Date(Date.now())
+
     function setContent(event){
         let content = event.target.value;
         setNoteContent(content);
@@ -22,7 +24,7 @@ return <form>
         if(noteContent !== undefined && noteContent.trim() !== ""){
             noteTitle = (noteTitle === undefined || noteTitle.trim() === "")?
                 noteContent.substring(0,21).trim(): noteTitle; 
-            props.onClick(noteTitle, noteContent,new Date(Date.now));
+            props.onAddNote(noteTitle, noteContent,nowDate);
             setNoteContent('');
             setNoteTitle('');
         }
