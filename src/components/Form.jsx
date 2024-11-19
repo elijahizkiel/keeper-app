@@ -18,7 +18,12 @@ function Form(props){
     }
     
 return <form>
-    <InputFields onTitleChange={setTitle} onContentChange={setContent} titleValue ={noteTitle} contentValue={noteContent} />
+    <InputFields 
+    onTitleChange={setTitle} 
+    onContentChange={setContent} 
+    titleValue ={noteTitle} 
+    contentValue={noteContent} 
+    />
     <div className="note-btns">
     <button type="button" id="add-note-btn" onClick={()=>{
         if(noteContent !== undefined && noteContent.trim() !== ""){
