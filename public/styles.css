@@ -1,5 +1,8 @@
+*{
+    box-sizing: border-box;
+}
 body {
-    background-color: #e1e0e0;
+    background-color: #eee;
     overflow-x: hidden;
   }
 div#root {
@@ -11,18 +14,46 @@ div#root {
 .header{
     background: #ffb700;
     color:#ece5d4;
+    font-family: McLaren, cursive;
     font-weight:600;
     padding: 1.25rem 1.25rem 1.25rem 2rem;
     display:block;
     width:105vw;
 }
+main {
+    position: relative;
+    left: 3vw;
+}
+.note-text {
+    display:flex;
+    flex-direction: column;
+    width: max(3rem, vw);
+    max-width: 70vw;
+    padding: 0 5%;
+}
+.note-text textarea {
+    resize:none;
+}
+.note-content textarea { 
+    resize: vertical;
+}
+.note-btns {
+    display: flex;
+    justify-content: space-between;
+}
+.note-cards {
+    display:grid;
+    grid-template-columns: repeat(4, 20vw);
+    gap: 1vh;
+}
 .note-card {
+    display:inline-block;
+    vertical-align: top;
     background-color: #fff;
-    width:max-content;
-    max-width: 25vw;
-    min-width: 10vw;
+    width: 100%;
+    height: fit-content;
     border-radius: 5pt;
-    overflow: hidden; 
+    overflow-y: hidden; 
     margin: 2rem 4rem;
 }
 .note-title {
@@ -30,15 +61,22 @@ div#root {
     background-color: #ece5d4;
     padding:10px;
     margin:0;
+    display: flex;
+    justify-content: space-between;
 }
-.note-text {
-    margin: 0;
-    padding: 10px;
+.last-update-time {
+    display: flex;
+    flex-flow: column;
+    color: #f98e1c;
+}
+.note-card .card-btns {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 5%;
 }
 footer {
-    position:absolute;
-    top: 90vh;
-    width: max(fit-content,20vw);
-    max-width: 80vw;
-    margin:5vh 5vw;
+    width: 100%;
+    height:2rem;
+    color:#7b7979;
+    text-align: center;
 }
