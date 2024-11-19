@@ -11,20 +11,22 @@ function App() {
     let [takingNote, setTakingNote] = useState(false);
     
     function addNote(title, noteContent, lastTimeUpdated){
-        console.log("from addNote function" + lastTimeUpdated);
-        setNotes((prev) => [...prev,new Note(title,noteContent,lastTimeUpdated)]);
-    }
 
-    function editNote(){
-        
+        setNotes((prev) => [new Note(title,noteContent,lastTimeUpdated), ...prev]);
     }
 
     function deleteNote(id){
         setNotes((prev)=>{
             return prev.filter((item) => {
-                return (item.title !== id);
+                return (item.timeOfCreation !== id);
             }) 
         })
+    }
+    function handleDone(noteId, editedNote){
+        setNotes(notes.map((note)=>{
+            if(note.timeOfCreation === noteId){return editedNote;}
+            return note;
+        }))        
     }
 
  return (
@@ -32,14 +34,27 @@ function App() {
     <Header text="Keeper" />
     <main>
         {
-        takingNote?<Form onAddNote={addNote} onDone={()=> setTakingNote(!takingNote)} />:
-            <button className='take-note-btn' onClick={()=>{
-                setTakingNote(!takingNote);
-            }}>Take Note</button>
+            takingNote? 
+              <Form
+                onAddNote={addNote} 
+                onDone={()=> setTakingNote(!takingNote)} 
+              />:
+              <button className='take-note-btn' 
+                onClick={() => {
+                    setTakingNote(!takingNote);
+                }}>
+                    Take Note
+              </button>
         }
         <div className='note-cards'>
-        {notes?.map(note => {
-            return <NoteCard key={note.title} title={note.title} text={note.content} lastUpdate={note.lastUpdateTime} onDelete={deleteNote} onEdit={editNote()} />
+        {notes?.map((note) => {
+            return <NoteCard 
+                key={note.timeOfCreation} 
+                id={note.timeOfCreation}
+                note={note} 
+                onDelete={deleteNote} 
+                onDone={handleDone}
+                />
         })}
         </div>
     </main>

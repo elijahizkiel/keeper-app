@@ -15,27 +15,35 @@ function NoteCard(props) {
       <span>{time}</span>
     );
   }
+  let width = {"width":"100%"}
   let [noteTitle, setNoteTitle] = useState(note.title);
   let [noteContent, setNoteContent] = useState(note.content);
   let [isEditing, setIsEditing] = useState(false);
   return (
     <div className="note-card">
       <div className="note-title">
-        <p
-          contentEditable={isEditing}
-          onInput={(e) =>{setNoteTitle(e.target.innerText)}}
-        >
+        {isEditing?<input
+          onChange={(e) =>{setNoteTitle(e.target.value)}}
+          value={noteTitle}
+          />:
+        <p>
           {noteTitle}
-        </p>
+        </p>}
         <div className="last-update-time">{getLastUpdate()}</div>
       </div>
-      <p
+      <div className="note-content">
+      {isEditing ?
+      <textarea
         className="note-text"
-        contentEditable={isEditing}
-        onInput={(e) => setNoteContent(e.target.innerText)}
-      >
-        {isEditing ? noteContent : noteContent.substring(0, 100)}
-      </p>
+        onChange={(e) => setNoteContent(e.target.value)}
+        value={noteContent}
+        style={width}
+        rows={10}
+      />:
+      <p>
+        {noteContent.substring(0, 100)}
+      </p>}
+      </div>
       <div className="card-btns">
         <button
           type="button"
