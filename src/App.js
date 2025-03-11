@@ -7,11 +7,18 @@ import Form from "./components/Form";
 const date = new Date(Date.now());
 
 function App() {
-    let [notes, setNotes] = useState([]);
+    const prevNotes = localStorage.getItem("notes");
+    let [notes, setNotes] = useState(prevnotes ? prevNotes:[]);
     let [takingNote, setTakingNote] = useState(false);
+
+    useEffect(()=>{
+        localStorage.setItem("notes",notes);
+        return ()=>{
+            localStorage.removeItem("notes");
+        }
+    },[notes]);
     
     function addNote(title, noteContent, lastTimeUpdated){
-
         setNotes((prev) => [new Note(title,noteContent,lastTimeUpdated), ...prev]);
     }
 
@@ -19,7 +26,7 @@ function App() {
         setNotes((prev)=>{
             return prev.filter((item) => {
                 return (item.timeOfCreation !== id);
-            }) 
+            }); 
         })
     }
     function handleDone(noteId, editedNote){
