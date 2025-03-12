@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import Header from './components/Header';
 import NoteCard,{Note} from './components/NoteCard';
 import Footer from './components/Footer';
@@ -8,7 +8,7 @@ const date = new Date(Date.now());
 
 function App() {
     const prevNotes = localStorage.getItem("notes");
-    let [notes, setNotes] = useState(prevnotes ? prevNotes:[]);
+    let [notes, setNotes] = useState(prevNotes ? prevNotes:[]);
     let [takingNote, setTakingNote] = useState(false);
 
     useEffect(()=>{
